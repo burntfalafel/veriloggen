@@ -24,6 +24,7 @@ int main(int argc, char** argv)
   Verilated::commandArgs(argc, argv);
 
   Top *top = new Top();
+  unsigned int run_no = 0;
 
 #ifdef TRACE
   Verilated::traceEverOn(true);
@@ -70,6 +71,7 @@ int main(int argc, char** argv)
     top->{{ input_name }} = 0;
     {%- endfor %}
 
+    std::cout << std::endl << "Run number: " <<  run_no++ << std::endl;
     top->eval();
     VL_PRINTF(" latency of execution: %f ms \n", top->latency.count());
     top->printInOuts();
@@ -82,6 +84,7 @@ int main(int argc, char** argv)
       break;
     }
     variableUse.printVars();
+    variableUse.clearVars();
 
     main_time += TIME_STEP;
   }
