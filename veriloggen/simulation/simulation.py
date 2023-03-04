@@ -533,7 +533,7 @@ def run_verilator(objs, display=False, top=None, outputfile=None,
     outputfile = os.path.abspath(outputfile)
 
     cmd = []
-    cmd.append('verilator')
+    cmd.append('$VERILATOR_ROOT/bin/verilator')
     cmd.append('--cc')
 
     if options is not None:

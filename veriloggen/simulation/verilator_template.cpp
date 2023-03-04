@@ -71,15 +71,17 @@ int main(int argc, char** argv)
     {%- endfor %}
 
     top->eval();
-
+    VL_PRINTF(" latency of execution: %f ms \n", top->latency.count());
+    top->printInOuts();
 #ifdef TRACE
     tfp->dump(main_time);
 #endif
 
     if(MAX_SIM_TIME > 0 && main_time >= MAX_SIM_TIME){
-      //std::cout << "# simulation time: " << main_time << std::endl;
+      std::cout << "# simulation time: " << main_time << std::endl;
       break;
     }
+    variableUse.printVars();
 
     main_time += TIME_STEP;
   }
